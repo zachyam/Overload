@@ -1,4 +1,4 @@
-import React, { state, useState } from "react";
+import React, { useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 import {
   StyleSheet,
@@ -6,9 +6,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ActivityIndicator,
 } from "react-native";
-import WorkoutButton from "../components/Button";
 
 import { useForm, Controller } from "react-hook-form";
 import "react-native-url-polyfill/auto";
@@ -33,21 +31,8 @@ export default function CreateNewWorkout({ navigation }) {
     { label: "7", value: 7 },
   ]);
   const { handleSubmit, control } = useForm();
-  // async function onSubmit(data) {
-  //   const { error } = await supabase
-  //     .from("workout_info")
-  //     .insert({ name: data.workoutName, num_workout_days: data.daysPerWeek });
-  //   console.log(data, "data");
-  //   console.log(error);
-  //   console.log(data);
-  //   navigation.navigate({
-  //     name: "Set New Workout",
-  //     params: { workoutName: data.workoutName, daysPerWeek: data.daysPerWeek },
-  //   });
-  // }
 
   const onSubmit = (data) => {
-    console.log(data);
     navigation.navigate({
       name: "Set New Workout",
       params: { workoutName: data.workoutName, daysPerWeek: data.daysPerWeek },
