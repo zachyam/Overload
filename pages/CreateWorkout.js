@@ -34,7 +34,7 @@ export default function CreateNewWorkout({ navigation }) {
 
   const onSubmit = (data) => {
     navigation.navigate({
-      name: "Set New Workout",
+      name: "Add Exercises",
       params: { workoutName: data.workoutName, daysPerWeek: data.daysPerWeek },
     });
   };

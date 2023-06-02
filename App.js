@@ -4,16 +4,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import CreateNewWorkout from "./pages/CreateWorkout";
-import ChooseExistingWorkout from "./pages/CreateWorkout";
-import SetNewWorkout from "./pages/SetNewWorkout";
+import LoadExistingWorkouts from "./pages/LoadExistingWorkouts";
+import AddExercises from "./pages/AddExercises";
+import Workout from "./pages/Workout";
 
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.selectWorkoutButton}>
         <WorkoutButton
-          label="Choose existing workout"
-          onPress={() => navigation.navigate("Choose Existing Workout")}
+          label="Start workout"
+          onPress={() => navigation.navigate("Start Workout")}
         />
       </View>
       <View style={styles.selectWorkoutButton}>
@@ -31,12 +32,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen
-          name="Choose Existing Workout"
-          component={ChooseExistingWorkout}
-        />
+        <Stack.Screen name="Start Workout" component={LoadExistingWorkouts} />
         <Stack.Screen name="Create New Workout" component={CreateNewWorkout} />
-        <Stack.Screen name="Set New Workout" component={SetNewWorkout} />
+        <Stack.Screen name="Add Exercises" component={AddExercises} />
+        <Stack.Screen name="Load Workout" component={Workout} />
       </Stack.Navigator>
     </NavigationContainer>
   );

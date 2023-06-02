@@ -1,26 +1,26 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
-import WorkoutsDay from "../components/WorkoutsDay";
+import AddExercise from "../components/AddExercise";
 
-export default function SetNewWorkout(navigation) {
+export default function AddExercises(navigation) {
   const { workoutName, daysPerWeek } = navigation.route.params;
-  const [workouts, setWorkouts] = useState({});
+  const [exercises, setExercises] = useState({});
 
-  const saveWorkout = () => {
-    console.log(workouts);
+  const saveExercises = () => {
+    console.log(exercises);
   };
 
   return (
     <View style={styles.container}>
       {Array.from({ length: daysPerWeek }, (_, index) => (
-        <WorkoutsDay
+        <AddExercise
           key={index}
           day={index}
-          workouts={workouts}
-          setWorkouts={setWorkouts}
+          exercises={exercises}
+          setExercises={setExercises}
         />
       ))}
-      <Pressable style={styles.saveWorkout} onPress={saveWorkout}>
+      <Pressable style={styles.saveExercises} onPress={saveExercises}>
         <Text style={styles.text}>Save</Text>
       </Pressable>
     </View>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  saveWorkout: {
+  saveExercises: {
     position: "absolute",
     bottom: 50,
     padding: 10,

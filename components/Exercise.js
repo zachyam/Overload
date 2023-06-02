@@ -1,16 +1,9 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Pressable,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Pressable, Text, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Modal from "react-native-modal";
 
-export default Workout = ({ day, workout, workouts, setWorkouts }) => {
+export default Exercise = ({ day, exercise, exercises, setExercises }) => {
   const { handleSubmit, control, reset } = useForm();
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -22,56 +15,56 @@ export default Workout = ({ day, workout, workouts, setWorkouts }) => {
     setModalVisible(false);
   };
 
-  const deleteWorkout = () => {
-    setWorkouts(() => {
-      const newWorkoutState = { ...workouts };
+  const deleteExercise = () => {
+    setExercises(() => {
+      const newWorkoutState = { ...exercises };
       const newArray = newWorkoutState[day].filter(
-        (value) => value !== workout
+        (value) => value !== exercise
       );
       newWorkoutState[day] = newArray;
       return newWorkoutState;
     });
   };
 
-  const editWorkout = (data) => {
-    const { workoutToEdit } = data;
+  const editExercise = (data) => {
+    const { exerciseToEdit } = data;
 
-    setWorkouts(() => {
-      // TODO: if the user renames 2 different workouts to the same workout name,
-      // that workout will show up twice, and clicking delete on one of them will
+    setExercises(() => {
+      // TODO: if the user renames 2 different exercises to the same name,
+      // that exercise will show up twice, and clicking delete on one of them will
       // delete them both
-      const newWorkoutState = { ...workouts };
+      const newWorkoutState = { ...exercises };
       const newArray = newWorkoutState[day].map((value) =>
-        value === workout ? workoutToEdit : value
+        value === exercise ? exerciseToEdit : value
       );
 
       newWorkoutState[day] = newArray;
       return newWorkoutState;
     });
-    console.log(workouts);
+    console.log(exercises);
 
     closeModal();
   };
 
   return (
-    <View style={styles.workoutContainer}>
-      <Text style={styles.workoutText}>{workout}</Text>
-      <Pressable style={styles.addWorkoutButton} onPress={openModal}>
+    <View style={styles.exerciseContainer}>
+      <Text style={styles.exerciseText}>{exercise}</Text>
+      <Pressable style={styles.addExerciseButton} onPress={openModal}>
         <View>
-          <Text>Edit workout</Text>
+          <Text>Edit exercise</Text>
         </View>
       </Pressable>
-      <Pressable style={styles.deleteWorkoutButton} onPress={deleteWorkout}>
+      <Pressable style={styles.deleteExerciseButton} onPress={deleteExercise}>
         <View>
-          <Text>Delete workout</Text>
+          <Text>Delete exercise</Text>
         </View>
       </Pressable>
 
       <Modal isVisible={isModalVisible}>
         <View style={styles.modalContainer}>
           <Controller
-            name="workoutToEdit"
-            defaultValue={workout}
+            name="exerciseToEdit"
+            defaultValue={exercise}
             control={control}
             render={({ field: { onChange, value } }) => (
               <TextInput
@@ -84,12 +77,12 @@ export default Workout = ({ day, workout, workouts, setWorkouts }) => {
           />
           <View style={styles.buttons}>
             <Pressable
-              style={styles.saveWorkout}
-              onPress={handleSubmit(editWorkout)}
+              style={styles.saveExercise}
+              onPress={handleSubmit(editExercise)}
             >
               <Text>Save</Text>
             </Pressable>
-            <Pressable style={styles.cancelWorkout} onPress={closeModal}>
+            <Pressable style={styles.cancelEditExercise} onPress={closeModal}>
               <Text>Cancel</Text>
             </Pressable>
           </View>
@@ -106,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
   },
-  workoutContainer: {
+  exerciseContainer: {
     flexDirection: "row",
     alignItems: "center",
     height: 50,
@@ -129,12 +122,12 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginBottom: 10,
   },
-  workoutText: {
+  exerciseText: {
     fontSize: 16,
     width: 50,
     textAlign: "center",
   },
-  addWorkoutButton: {
+  addExerciseButton: {
     width: 100,
     height: 35,
     alignItems: "center",
@@ -148,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginLeft: "auto",
   },
-  deleteWorkoutButton: {
+  deleteExerciseButton: {
     width: 100,
     height: 35,
     alignItems: "center",
@@ -163,7 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginLeft: "auto",
   },
-  saveWorkout: {
+  saveExercise: {
     flex: 1,
     alignItems: "center",
     margin: 5,
@@ -175,7 +168,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "#50C878",
   },
-  cancelWorkout: {
+  cancelEditExercise: {
     flex: 1,
     alignItems: "center",
     margin: 5,

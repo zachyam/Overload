@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Modal from "react-native-modal";
-import Workout from "./Workout";
+import Exercise from "./Exercise";
 
-export default WorkoutsDay = ({ day, workouts, setWorkouts }) => {
+export default AddExercise = ({ day, exercises, setExercises }) => {
   const { handleSubmit, control, reset } = useForm();
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -24,35 +24,35 @@ export default WorkoutsDay = ({ day, workouts, setWorkouts }) => {
   };
 
   const handleSave = (data) => {
-    const { workoutToAdd } = data;
-    if (day in workouts) {
+    const { exerciseToAdd } = data;
+    if (day in exercises) {
       // Key already exists, append the value to its array
-      setWorkouts((workouts) => ({
-        ...workouts,
-        [day]: [...workouts[day], workoutToAdd],
+      setExercises((exercises) => ({
+        ...exercises,
+        [day]: [...exercises[day], exerciseToAdd],
       }));
     } else {
       // Key doesn't exist, add a new array with the value
-      setWorkouts((workouts) => ({
-        ...workouts,
-        [day]: [workoutToAdd],
+      setExercises((exercises) => ({
+        ...exercises,
+        [day]: [exerciseToAdd],
       }));
     }
 
-    console.log(workouts);
+    console.log(exercises);
 
     reset();
     setModalVisible(false);
   };
 
-  const renderWorkoutsForDay = (day) => {
-    if (workouts[day]) {
-      return workouts[day].map((workout, index) => (
-        <Workout
+  const renderExercisesForDay = (day) => {
+    if (exercises[day]) {
+      return exercises[day].map((exercise, index) => (
+        <Exercise
           day={day}
-          workout={workout}
-          workouts={workouts}
-          setWorkouts={setWorkouts}
+          exercise={exercise}
+          exercises={exercises}
+          setExercises={setExercises}
           key={index}
         />
       ));
@@ -62,22 +62,22 @@ export default WorkoutsDay = ({ day, workouts, setWorkouts }) => {
 
   return (
     <View>
-      <View style={styles.workoutDayContainer}>
+      <View style={styles.exerciseDayContainer}>
         <Text style={styles.text}> Day {day}</Text>
-        <Pressable style={styles.addWorkoutButton} onPress={openModal}>
+        <Pressable style={styles.addExerciseButton} onPress={openModal}>
           <View style={styles.modalText}>
-            <Text>Add workout</Text>
+            <Text>Add exercise</Text>
           </View>
         </Pressable>
       </View>
-      <View style={styles.workouts}>{renderWorkoutsForDay(day)}</View>
+      <View style={styles.exercises}>{renderExercisesForDay(day)}</View>
       <Modal isVisible={isModalVisible}>
         <View style={styles.modalContainer}>
           <TouchableOpacity onPress={() => setModalVisible(closeModal)}>
             <Text style={styles.modalX}>X</Text>
           </TouchableOpacity>
           <Controller
-            name="workoutToAdd"
+            name="exerciseToAdd"
             defaultValue=""
             control={control}
             render={({ field: { onChange, value } }) => (
@@ -91,12 +91,12 @@ export default WorkoutsDay = ({ day, workouts, setWorkouts }) => {
           />
           <View style={styles.buttons}>
             <Pressable
-              style={styles.saveWorkout}
+              style={styles.saveExercise}
               onPress={handleSubmit(handleSave)}
             >
               <Text style={styles.text}>Save</Text>
             </Pressable>
-            <Pressable style={styles.cancelWorkout}>
+            <Pressable style={styles.cancelSaveExercise}>
               <Text style={styles.text}>Cancel</Text>
             </Pressable>
           </View>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
   },
-  workoutDayContainer: {
+  exerciseDayContainer: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#ccc",
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   modalText: {
     flex: 1,
   },
-  addWorkoutButton: {
+  addExerciseButton: {
     width: 100,
     height: 35,
     alignItems: "center",
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginBottom: 10,
   },
-  saveWorkout: {
+  saveExercise: {
     flex: 1,
     alignItems: "center",
     margin: 5,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "#50C878",
   },
-  cancelWorkout: {
+  cancelSaveExercise: {
     flex: 1,
     alignItems: "center",
     margin: 5,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "#A52A2A",
   },
-  workouts: {
+  exercises: {
     marginBottom: 20,
   },
   text: {
