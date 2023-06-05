@@ -7,6 +7,7 @@ import CreateNewWorkout from "./pages/CreateWorkout";
 import LoadExistingWorkouts from "./pages/LoadExistingWorkouts";
 import AddExercises from "./pages/AddExercises";
 import Workout from "./pages/Workout";
+import StartExercise from "./pages/StartExercise";
 
 function HomeScreen({ navigation }) {
   return (
@@ -36,6 +37,7 @@ export default function App() {
         <Stack.Screen name="Create New Workout" component={CreateNewWorkout} />
         <Stack.Screen name="Add Exercises" component={AddExercises} />
         <Stack.Screen name="Load Workout" component={Workout} />
+        <Stack.Screen name="Start Exercise" component={StartExercise} />
       </Stack.Navigator>
     </NavigationContainer>
   );

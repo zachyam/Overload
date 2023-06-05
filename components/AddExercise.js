@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Modal from "react-native-modal";
-import Exercise from "./Exercise";
+import DisplayAddedExercise from "./DisplayAddedExercise";
 
 export default AddExercise = ({ day, exercises, setExercises }) => {
   const { handleSubmit, control, reset } = useForm();
@@ -48,7 +48,7 @@ export default AddExercise = ({ day, exercises, setExercises }) => {
   const renderExercisesForDay = (day) => {
     if (exercises[day]) {
       return exercises[day].map((exercise, index) => (
-        <Exercise
+        <DisplayAddedExercise
           day={day}
           exercise={exercise}
           exercises={exercises}

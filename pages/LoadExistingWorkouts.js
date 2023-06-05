@@ -9,26 +9,21 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 export default function LoadExistingWorkouts({ navigation }) {
-  const [workouts, setWorkouts] = useState([]);
-
-  // const onSubmit = (data) => {
-  //   navigation.navigate({
-  //     name: "Start Selected Workout",
-  //     params: {},
-  //   });
-  // };
-
   const loadWorkout = () => {
     navigation.navigate({
       name: "Load Workout",
-      params: {},
+      params: { workoutName: "OverLoad" },
     });
   };
 
   return (
     <View style={styles.container}>
       {Array.from({ length: 1 }, (_, index) => (
-        <TouchableOpacity style={styles.rowContainer} onPress={loadWorkout}>
+        <TouchableOpacity
+          style={styles.rowContainer}
+          onPress={loadWorkout}
+          key={index}
+        >
           <Text style={styles.rowText}>Pressable Row</Text>
           <View style={styles.iconContainer}>
             <Ionicons name="chevron-forward-outline" size={24} color="#999" />
