@@ -24,7 +24,7 @@ export default function LoadExistingWorkouts({ navigation }) {
           onPress={loadWorkout}
           key={index}
         >
-          <Text style={styles.rowText}>Pressable Row</Text>
+          <Text style={styles.rowText}>Overload</Text>
           <View style={styles.iconContainer}>
             <Ionicons name="chevron-forward-outline" size={24} color="#999" />
           </View>

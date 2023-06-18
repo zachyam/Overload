@@ -2,11 +2,10 @@ import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
 export default function Workout(input) {
   const { workoutName } = input.route.params;
-
   const startExercise = () => {
     input.navigation.navigate({
       name: "Start Exercise",
-      params: {},
+      params: { workoutName: workoutName },
     });
   };
 
@@ -18,7 +17,7 @@ export default function Workout(input) {
           onPress={startExercise}
           key={index}
         >
-          <Text style={styles.rowText}>{workoutName}</Text>
+          <Text style={styles.rowText}>Day {index + 1}</Text>
         </TouchableOpacity>
       ))}
     </View>

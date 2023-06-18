@@ -3,16 +3,18 @@ import { List } from "react-native-paper";
 import { View, Text, StyleSheet } from "react-native";
 import Set from "../components/Set";
 
-export default function StartExercise() {
-  const [weightValue, setWeightValue] = useState({});
-  const [repValue, setRepValue] = useState({});
+export default function StartExercise(input) {
+  const workoutName = input.route.params.workoutName;
+  const [weightValues, setWeightValues] = useState({});
+  const [repValues, setRepValues] = useState({});
 
   const numSets = 4;
+  const exerciseName = "Weighted Dips";
   return (
     <View style={styles.container}>
-      <List.Section title="Overload" titleStyle={styles.titleText}>
+      <List.Section title={workoutName} titleStyle={styles.titleText}>
         <List.Accordion
-          title="Weighted Dips"
+          title={exerciseName}
           left={(props) => <List.Icon {...props} />}
         >
           <View style={styles.rowContainer}>
@@ -20,15 +22,18 @@ export default function StartExercise() {
             <Text style={styles.columnHeader}>Weight</Text>
             <Text style={styles.columnHeader}>Rep</Text>
             <Text style={styles.columnHeader}>Prev Weight</Text>
-            <Text style={styles.columnHeader}>Prev Set</Text>
+            <Text style={styles.columnHeader}>Prev Rep</Text>
           </View>
           {Array.from({ length: numSets }, (_, index) => (
             <Set
               key={index}
+              exerciseName={exerciseName}
               setNumber={index}
               numSets={numSets}
-              setWeightValue={setWeightValue}
-              setRepValue={setRepValue}
+              weightValues={weightValues}
+              setWeightValues={setWeightValues}
+              repValues={repValues}
+              setRepValues={setRepValues}
             ></Set>
           ))}
         </List.Accordion>

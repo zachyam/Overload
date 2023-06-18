@@ -3,13 +3,38 @@ import { List } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-export default function Set(key, numSets) {
-  const [weightValue, setWeightValue] = useState(0);
-  const [repValue, setRepValue] = useState(0);
+export default function Set({
+  exerciseName,
+  setNumber,
+  numSets,
+  weightValues,
+  setWeightValues,
+  repValues,
+  setRepValues,
+}) {
+  const title = "Set " + setNumber;
+  const handleSaveWeightValue = (data) => {
+    // console.log(weightValues);
+    setWeightValues((weightValues) => ({
+      ...weightValues,
+      [exerciseName]: {
+        ...(weightValues[exerciseName] || {}),
+        [setNumber]: data,
+      },
+    }));
+  };
 
-  const { handleSubmit, control } = useForm();
+  const handleSaveRepValue = (data) => {
+    console.log(repValues);
+    setRepValues((repValues) => ({
+      ...repValues,
+      [exerciseName]: {
+        ...(repValues[exerciseName] || {}),
+        [setNumber]: data,
+      },
+    }));
+  };
 
-  const title = "Set " + key.setNumber;
   return (
     <View style={styles.container}>
       <View style={styles.column}>
@@ -17,38 +42,21 @@ export default function Set(key, numSets) {
       </View>
 
       <View style={styles.column}>
-        <Controller
-          name="Weight"
-          defaultValue=""
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              keyboardType="numeric"
-              style={styles.input}
-              selectionColor={"#5188E3"}
-              onChangeText={onChange}
-              value={value}
-              setValue={setWeightValue}
-            />
-          )}
+        <TextInput
+          keyboardType="numeric"
+          style={styles.input}
+          selectionColor={"#5188E3"}
+          onChangeText={handleSaveWeightValue}
+          value={weightValues[exerciseName]?.[setNumber] || ""}
         />
       </View>
       <View style={styles.column}>
-        <Controller
-          name="Rep"
-          keyboardType="number-pad"
-          defaultValue=""
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              keyboardType="numeric"
-              style={styles.input}
-              selectionColor={"#5188E3"}
-              onChangeText={onChange}
-              value={value}
-              setValue={setRepValue}
-            />
-          )}
+        <TextInput
+          keyboardType="numeric"
+          style={styles.input}
+          selectionColor={"#5188E3"}
+          onChangeText={handleSaveRepValue}
+          value={repValues[exerciseName]?.[setNumber] || ""}
         />
       </View>
       <View style={styles.column}>
